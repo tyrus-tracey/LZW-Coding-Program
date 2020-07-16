@@ -11,7 +11,7 @@ char c;
 
 int main()
 {
-    cout << "\nLZW Coding Program.";
+    cout << "LZW Coding Program.";
 
     while (running) {
         cout << "\n\nEnter string (X to close):\n";
