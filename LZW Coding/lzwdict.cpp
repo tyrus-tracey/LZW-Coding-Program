@@ -41,7 +41,7 @@ int lzwdict::getCode(std::string symbol)
 }
 
 //linear search of array, returns true if match found
-bool lzwdict::hasCode(std::string symbol)
+bool lzwdict::hasSymbol(std::string symbol)
 {
 	for (int i = 0; i < position; i++) {
 		if (codes[i] == symbol) {
