@@ -4,7 +4,6 @@
 #include "lzwdict.h"
 using namespace std;
 bool running = true;
-lzwdict dict;
 string inputString;
 string s;
 char c;
@@ -17,16 +16,18 @@ int main()
         cout << "\n\nEnter string (X to close):\n";
         cin >> inputString;
         if (inputString != "X" && inputString != "x") {
+            lzwdict dict;
             stringstream inputStream(inputString);
 
             inputStream >> c;
             s = c;
-            while (inputStream >> c) {
-                if (dict.exists(s + c)) {
+            cout << "Output: ";
+;           while (inputStream >> c) {
+                if (dict.hasCode(s + c)) {
                     s = s + c;
                 }
                 else {
-                    cout << dict.getCode(s) << endl;
+                    cout << dict.getCode(s) << " ";
                     dict.insert(s + c);
                     s = c;
                 }
