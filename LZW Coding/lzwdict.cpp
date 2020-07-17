@@ -2,8 +2,9 @@
 #include <iostream>
 #include <iomanip>
 
+//Creates an array-based lookup method of a fixed size (expands if limit reached)
 lzwdict::lzwdict()
-	: codes(new std::string[1000]), position(5)
+	: capacity(20), codes(new std::string[20]), position(5)
 {
 	codes[0] = "A";
 	codes[1] = "B";
@@ -17,15 +18,17 @@ lzwdict::~lzwdict()
 	delete[] codes;
 }
 
+//insert string into dictionary, using index as the codeword
 void lzwdict::insert(std::string symbol)
 {
-	if (position > 999) {
-		return;
+	if (position >= capacity) {
+		expand();
 	}
 	codes[position] = symbol;
 	position++;
 }
 
+//linear search of array, returns matching index (== codeword)
 int lzwdict::getCode(std::string symbol)
 {
 	int code = -1;
@@ -37,6 +40,7 @@ int lzwdict::getCode(std::string symbol)
 	return code;
 }
 
+//linear search of array, returns true if match found
 bool lzwdict::hasCode(std::string symbol)
 {
 	for (int i = 0; i < position; i++) {
@@ -54,4 +58,16 @@ void lzwdict::print()
 	for (int i = 0; i < position; i++) {
 		std::cout << "   " << codes[i] << std::setw(15 - codes[i].length()) << i << std::endl;
 	}
+}
+
+// Allocates larger array and performs deepcopy if limit reached
+void lzwdict::expand()
+{
+	std::string* newCodes = new std::string[position * 2];
+	for (int i = 0; i < position; i++) {
+		newCodes[i] = codes[i];
+	}
+	delete[] codes;
+	codes = newCodes;
+	capacity *= 2;
 }

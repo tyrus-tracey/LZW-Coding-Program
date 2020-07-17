@@ -13,7 +13,9 @@ public:
 	void print();
 
 private:
-	std::string* codes;
-	int position;
+	void expand();
+	std::string* codes;	//array-based dictionary
+	int position;		//next available space in dictionary
+	int capacity;		//default limit of 25
 };
 
