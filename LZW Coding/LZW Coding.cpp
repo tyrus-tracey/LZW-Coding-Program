@@ -22,7 +22,7 @@ int main()
             s = c;
             cout << "Output: ";
 ;           while (inputStream >> c) {
-                if (dict.hasCode(s + c)) {
+                if (dict.hasSymbol(s + c)) {
                     s = s + c;
                 }
                 else {
